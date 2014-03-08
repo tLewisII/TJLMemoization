@@ -23,4 +23,5 @@
 * value and returns the cached value on subsequent calls of the same selector, instance and arguments.
 */
 - (id)memoizeSelector:(SEL)selector withArguments:(id)args, ... NS_REQUIRES_NIL_TERMINATION;
+
 @end
