@@ -21,6 +21,8 @@
 		DBC1A62918C96007007F7326 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC1A60B18C96006007F7326 /* UIKit.framework */; };
 		DBC1A63118C96007007F7326 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DBC1A62F18C96007007F7326 /* InfoPlist.strings */; };
 		DBC1A63318C96007007F7326 /* TJLMemoizationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A63218C96007007F7326 /* TJLMemoizationTests.m */; };
+		DBC1A63E18C9604B007F7326 /* NSObject+Memoization.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A63D18C9604B007F7326 /* NSObject+Memoization.m */; };
+		DBC1A64318C971E6007F7326 /* document.txt in Resources */ = {isa = PBXBuildFile; fileRef = DBC1A64218C971E6007F7326 /* document.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,9 @@
 		DBC1A62E18C96007007F7326 /* TJLMemoizationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TJLMemoizationTests-Info.plist"; sourceTree = "<group>"; };
 		DBC1A63018C96007007F7326 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DBC1A63218C96007007F7326 /* TJLMemoizationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TJLMemoizationTests.m; sourceTree = "<group>"; };
+		DBC1A63C18C9604B007F7326 /* NSObject+Memoization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Memoization.h"; sourceTree = "<group>"; };
+		DBC1A63D18C9604B007F7326 /* NSObject+Memoization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Memoization.m"; sourceTree = "<group>"; };
+		DBC1A64218C971E6007F7326 /* document.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = document.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +117,7 @@
 		DBC1A60D18C96006007F7326 /* TJLMemoization */ = {
 			isa = PBXGroup;
 			children = (
+				DBC1A64218C971E6007F7326 /* document.txt */,
 				DBC1A61618C96006007F7326 /* TJLAppDelegate.h */,
 				DBC1A61718C96006007F7326 /* TJLAppDelegate.m */,
 				DBC1A61918C96006007F7326 /* Main.storyboard */,
@@ -119,6 +125,8 @@
 				DBC1A61D18C96006007F7326 /* TJLViewController.m */,
 				DBC1A61F18C96006007F7326 /* Images.xcassets */,
 				DBC1A60E18C96006007F7326 /* Supporting Files */,
+				DBC1A63C18C9604B007F7326 /* NSObject+Memoization.h */,
+				DBC1A63D18C9604B007F7326 /* NSObject+Memoization.m */,
 			);
 			path = TJLMemoization;
 			sourceTree = "<group>";
@@ -230,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBC1A62018C96006007F7326 /* Images.xcassets in Resources */,
+				DBC1A64318C971E6007F7326 /* document.txt in Resources */,
 				DBC1A61218C96006007F7326 /* InfoPlist.strings in Resources */,
 				DBC1A61B18C96006007F7326 /* Main.storyboard in Resources */,
 			);
@@ -250,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBC1A63E18C9604B007F7326 /* NSObject+Memoization.m in Sources */,
 				DBC1A61E18C96006007F7326 /* TJLViewController.m in Sources */,
 				DBC1A61418C96006007F7326 /* main.m in Sources */,
 				DBC1A61818C96006007F7326 /* TJLAppDelegate.m in Sources */,
