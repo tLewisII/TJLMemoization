@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class TJLMemoizedFunction;
+
 @interface NSObject (Memoization)
 
 /**
@@ -22,6 +24,6 @@
 * @return The return value of the given selector with the given arguments. Caches the return
 * value and returns the cached value on subsequent calls of the same selector, instance and arguments.
 */
-- (id)memoizeSelector:(SEL)selector withArguments:(id)args, ... NS_REQUIRES_NIL_TERMINATION;
+- (TJLMemoizedFunction *)memoizeSelector:(SEL)selector withArguments:(id)args, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end

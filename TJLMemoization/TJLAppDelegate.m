@@ -8,6 +8,7 @@
 
 #import "TJLAppDelegate.h"
 #import "NSObject+Memoization.h"
+#import "TJLMemoizedFunction.h"
 
 @implementation TJLAppDelegate
 
@@ -16,17 +17,19 @@
     NSError *error;
     NSString *s = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"document" ofType:@"txt"]
                                                   encoding:NSUTF8StringEncoding error:&error];
-
+        TJLMemoizedFunction *func1 = [self memoizeSelector:@selector(linesFromString:) withArguments:s, nil];
     NSDate *now = [NSDate date];
-    [self memoizeSelector:@selector(linesFromString:) withArguments:s, nil];
-    NSLog(@"%f", [now timeIntervalSinceNow]);
-    NSDate *then = [NSDate date];
-    [self memoizeSelector:@selector(linesFromString:) withArguments:s, nil];
-    NSLog(@"%f", [then timeIntervalSinceNow]);
+    dispatch_group_t group_t = dispatch_group_create();
+    for(NSInteger i = 0; i < 10; i++) {
+        dispatch_group_async(group_t, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [func1 invoke];
+        });
 
-    NSDate *again = [NSDate date];
-    [self memoizeSelector:@selector(linesFromString:) withArguments:[NSString stringWithFormat:@"aaaaaaaaa %@", s], nil];
-    NSLog(@"%f", [again timeIntervalSinceNow]);
+    }
+    dispatch_group_notify(group_t, dispatch_get_main_queue(), ^{
+
+        NSLog(@"%f", [now timeIntervalSinceNow]);
+    });
 
     return YES;
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7426C3BD1174F0D1034B9442 /* NSObject+Memoization.m in Sources */ = {isa = PBXBuildFile; fileRef = 7426C534E0B66D865E2645A3 /* NSObject+Memoization.m */; };
+		7426C7B6D4D5C920C0ED3868 /* TJLMemoizedFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 7426C7B4F5F58297EBE723B4 /* TJLMemoizedFunction.m */; };
 		DBC1A60818C96006007F7326 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC1A60718C96006007F7326 /* Foundation.framework */; };
 		DBC1A60A18C96006007F7326 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC1A60918C96006007F7326 /* CoreGraphics.framework */; };
 		DBC1A60C18C96006007F7326 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC1A60B18C96006007F7326 /* UIKit.framework */; };
@@ -37,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		7426C534E0B66D865E2645A3 /* NSObject+Memoization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Memoization.m"; sourceTree = "<group>"; };
+		7426C7B4F5F58297EBE723B4 /* TJLMemoizedFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TJLMemoizedFunction.m; sourceTree = "<group>"; };
+		7426CBDF816DDA135D5FE5BC /* TJLMemoizedFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TJLMemoizedFunction.h; sourceTree = "<group>"; };
 		7426CE70C993FA86B9B7894F /* NSObject+Memoization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Memoization.h"; sourceTree = "<group>"; };
 		DBC1A60418C96006007F7326 /* TJLMemoization.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TJLMemoization.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBC1A60718C96006007F7326 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -89,6 +92,8 @@
 			children = (
 				7426CE70C993FA86B9B7894F /* NSObject+Memoization.h */,
 				7426C534E0B66D865E2645A3 /* NSObject+Memoization.m */,
+				7426C7B4F5F58297EBE723B4 /* TJLMemoizedFunction.m */,
+				7426CBDF816DDA135D5FE5BC /* TJLMemoizedFunction.h */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -271,6 +276,7 @@
 				DBC1A61418C96006007F7326 /* main.m in Sources */,
 				DBC1A61818C96006007F7326 /* TJLAppDelegate.m in Sources */,
 				7426C3BD1174F0D1034B9442 /* NSObject+Memoization.m in Sources */,
+				7426C7B6D4D5C920C0ED3868 /* TJLMemoizedFunction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
