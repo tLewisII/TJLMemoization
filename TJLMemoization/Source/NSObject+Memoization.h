@@ -17,12 +17,15 @@
 * and returning this cached value on subsequent calls. Useful for when you need to
 * make intensive computations multiple times with the same inputs but don't want
 * to actually do the computation multiple times for performance reasons.
+* Note that this does not actually invoke the selector, but returns a proxy object that can
+* be used for calling the selector.
 *
 * @param selector The selector that you want to memoize. Must be declared on the calling object.
 * @param args A variadic argument list that corresponds to the arguments for the given selector.
-* Arguments must be in the correct order that they would be passed to the selector.
-* @return The return value of the given selector with the given arguments. Caches the return
-* value and returns the cached value on subsequent calls of the same selector, instance and arguments.
+* Arguments must be in the correct order that they would be passed to the selector. primitive and struct arguments
+* must be wrapped in NSNumber or NSValue.
+* @return The A TJLMemoizedFunction object the encapsulates the invocation of the given selector
+* and return value of the given selector.
 */
 - (TJLMemoizedFunction *)memoizeSelector:(SEL)selector withArguments:(id)args, ... NS_REQUIRES_NIL_TERMINATION;
 
