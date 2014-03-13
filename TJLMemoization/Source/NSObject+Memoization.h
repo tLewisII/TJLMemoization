@@ -29,4 +29,5 @@
 */
 - (TJLMemoizedFunction *)memoizeSelector:(SEL)selector withArguments:(id)args, ... NS_REQUIRES_NIL_TERMINATION;
 
+- (id)memoizeAndInvokeSelector:(SEL)selector withArguments:(id)args, ... NS_REQUIRES_NIL_TERMINATION;
 @end

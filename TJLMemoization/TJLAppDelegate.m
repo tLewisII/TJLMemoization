@@ -8,7 +8,8 @@
 
 #import "TJLAppDelegate.h"
 #import "NSObject+Memoization.h"
-#import "TJLMemoizedFunction.h"
+
+static const void *key = &key;
 
 @implementation TJLAppDelegate
 
@@ -17,22 +18,20 @@
     NSError *error;
     NSString *s = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"document" ofType:@"txt"]
                                                   encoding:NSUTF8StringEncoding error:&error];
-        TJLMemoizedFunction *func1 = [self memoizeSelector:@selector(linesFromString:) withArguments:s, nil];
+
     NSDate *now = [NSDate date];
     dispatch_group_t group_t = dispatch_group_create();
     for(NSInteger i = 0; i < 10; i++) {
         dispatch_group_async(group_t, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [func1 invoke];
+            [self memoizeAndInvokeSelector:@selector(linesFromString:) withArguments:s, nil];
         });
-
     }
-    dispatch_group_notify(group_t, dispatch_get_main_queue(), ^{
 
+    dispatch_group_notify(group_t, dispatch_get_main_queue(), ^{
         NSLog(@"%f", [now timeIntervalSinceNow]);
     });
 
     return YES;
-
 }
 
 - (id)linesFromString:(NSString *)s {

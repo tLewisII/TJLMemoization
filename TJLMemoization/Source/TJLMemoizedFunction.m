@@ -24,8 +24,7 @@ static const void *key = &key;
 
     _invocation = invocation;
     _methodSignature = methodSignature;
-    _lock = [NSLock new];
-
+    _lock = [NSLock new];    
 
     return self;
 }
@@ -44,7 +43,6 @@ static const void *key = &key;
     else {
         [self.lock unlock];
         return result;
-
     }
 }
 
