@@ -5,13 +5,16 @@
 
 #import "TJLMemoizedFunction.h"
 #import <objc/runtime.h>
+#import <libkern/OSAtomic.h>
 
 static const void *key = &key;
 
-@interface TJLMemoizedFunction ()
+@interface TJLMemoizedFunction () {
+    OSSpinLock tjlMemoizationFunctionSpinLock;
+}
+
 @property(strong, nonatomic) NSInvocation *invocation;
 @property(strong, nonatomic) NSMethodSignature *methodSignature;
-@property(strong, nonatomic) NSLock *lock;
 @end
 
 @implementation TJLMemoizedFunction
@@ -24,26 +27,22 @@ static const void *key = &key;
 
     _invocation = invocation;
     _methodSignature = methodSignature;
-    _lock = [NSLock new];    
+    tjlMemoizationFunctionSpinLock = OS_SPINLOCK_INIT;
 
     return self;
 }
 
 - (id)invoke {
-    [self.lock lock];
+    OSSpinLockLock(&tjlMemoizationFunctionSpinLock);
     id result = objc_getAssociatedObject(self, key);
     if(!result) {
         [self.invocation invoke];
         result = [self returnValueForMethodSignature:self.methodSignature withInvocation:self.invocation];
         objc_setAssociatedObject(self, key, result, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        [self.lock unlock];
+    }
 
-        return result;
-    }
-    else {
-        [self.lock unlock];
-        return result;
-    }
+    OSSpinLockUnlock(&tjlMemoizationFunctionSpinLock);
+    return result;
 }
 
 - (id)returnValueForMethodSignature:(NSMethodSignature *)methodSignature withInvocation:(NSInvocation *)invocation {

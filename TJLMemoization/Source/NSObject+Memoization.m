@@ -55,7 +55,7 @@
 
         [invocation invoke];
         result = [self returnValueForMethodSignature:methodSignature withInvocation:invocation];
-        objc_setAssociatedObject(self, key, result, OBJC_ASSOCIATION_RETAIN);
+        objc_setAssociatedObject(self, key, result, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
 
     OSSpinLockUnlock(&tjlMemoizationLock);
