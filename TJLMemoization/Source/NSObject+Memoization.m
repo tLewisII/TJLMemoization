@@ -33,13 +33,13 @@
 }
 
 - (id)memoizeAndInvokeSelector:(SEL)selector withArguments:(id)arguments, ... {
-    static OSSpinLock spinLock = OS_SPINLOCK_INIT;
+    static OSSpinLock tjlMemoizationLock = OS_SPINLOCK_INIT;
+
     void *key = (void *)((uintptr_t)(__bridge void *)self ^ (uintptr_t)(void *)selector ^ (uintptr_t)arguments);
 
-    OSSpinLockLock(&spinLock);
+    OSSpinLockLock(&tjlMemoizationLock);
     id result = objc_getAssociatedObject(self, key);
     if(!result) {
-        NSLog(@"no cache");
         NSMethodSignature *methodSignature = [self methodSignatureForSelector:selector];
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
         invocation.selector = selector;
@@ -47,23 +47,20 @@
 
         va_list args;
         va_start(args, arguments);
-        NSInteger index = 2;
+        NSUInteger index = 2;
         for(id argument = arguments; argument != nil; argument = va_arg(args, id)) {
-            [self setArgument:argument atIndex:(NSUInteger)index++ inInvocation:invocation];
+            [self setArgument:argument atIndex:index++ inInvocation:invocation];
         }
         va_end(args);
 
         [invocation invoke];
         result = [self returnValueForMethodSignature:methodSignature withInvocation:invocation];
         objc_setAssociatedObject(self, key, result, OBJC_ASSOCIATION_RETAIN);
-        OSSpinLockUnlock(&spinLock);
-        return result;
     }
-    else {
-        OSSpinLockUnlock(&spinLock);
-        NSLog(@"cache");
-        return result;
-    }
+
+    OSSpinLockUnlock(&tjlMemoizationLock);
+    return result;
+
 }
 
 - (void)setArgument:(id)object atIndex:(NSUInteger)index inInvocation:(NSInvocation *)invocation {

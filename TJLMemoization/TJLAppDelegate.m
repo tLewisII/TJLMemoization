@@ -24,6 +24,7 @@ static const void *key = &key;
     for(NSInteger i = 0; i < 10; i++) {
         dispatch_group_async(group_t, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             [self memoizeAndInvokeSelector:@selector(linesFromString:) withArguments:s, nil];
+            [self memoizeAndInvokeSelector:@selector(linesFromString:withRange:) withArguments:s, [NSValue valueWithRange:NSMakeRange(0, 20)], nil];
         });
     }
 
@@ -37,6 +38,14 @@ static const void *key = &key;
 - (id)linesFromString:(NSString *)s {
     NSMutableArray *array = [NSMutableArray array];
     [s enumerateSubstringsInRange:NSMakeRange(0, s.length) options:NSStringEnumerationByWords usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+        [array addObject:substring];
+    }];
+    return array;
+}
+
+- (id)linesFromString:(NSString *)s withRange:(NSRange)range {
+    NSMutableArray *array = [NSMutableArray array];
+    [s enumerateSubstringsInRange:range options:NSStringEnumerationByWords usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
         [array addObject:substring];
     }];
     return array;
