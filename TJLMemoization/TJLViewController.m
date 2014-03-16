@@ -10,6 +10,12 @@
 
 static NSString *const cellIdentifier = @"CELL";
 
+static NSString *const root_user_key = @"user";
+
+static NSString *const root_name_key = @"name";
+
+static NSString *const root_text_key = @"text";
+
 #import "TJLViewController.h"
 #import "NSObject+Memoization.h"
 
@@ -39,16 +45,16 @@ static NSString *const cellIdentifier = @"CELL";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     NSDictionary *postDict = self.postsArray[(NSUInteger)indexPath.row];
 
-    cell.textLabel.text = postDict[@"user"][@"name"];
+    cell.textLabel.text = postDict[root_user_key][root_name_key];
     cell.detailTextLabel.numberOfLines = 10;
-    cell.detailTextLabel.text = postDict[@"text"];
+    cell.detailTextLabel.text = postDict[root_text_key];
 
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *post = self.postsArray[(NSUInteger)indexPath.row];
-    NSString *text = post[@"text"];
+    NSString *text = post[root_text_key];
     return [[self memoizeAndInvokeSelector:@selector(calculateHeightForText:atIndexPath:) withArguments:text, indexPath, nil] floatValue];
 }
 
@@ -60,7 +66,10 @@ static NSString *const cellIdentifier = @"CELL";
     UIFont *font = [UIFont systemFontOfSize:12];
     CGSize maximumLabelSize = CGSizeMake(220, 1000);
     NSDictionary *attributes = @{NSFontAttributeName : font};
-    CGRect boundingRect = [post[@"text"] boundingRectWithSize:maximumLabelSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attributes context:[[NSStringDrawingContext alloc] init]];
+    CGRect boundingRect = [post[root_text_key] boundingRectWithSize:maximumLabelSize
+                                                            options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                                         attributes:attributes
+                                                            context:NSStringDrawingContext.new];
 
     return ceilf(CGRectGetHeight(boundingRect) + 75);
 }
