@@ -1,10 +1,18 @@
 TJLMemoization
 ===========
-#FIXME description
+Simple memoization (which is just a fancy term for "calculate this value once, cache it and return the cached value on subsequent calls") for Objective-C methods. Adds a category to NSObject that lets you memoize any selector on any instance of an object.
 
 Usage
 ===========
-#FIXME description
+Memoization is useful when you need to perform the same computationally intense calculation many times over, but don't want to compute the results over and over again. A good example is tableView row heights. Calculating the height in `tableView:heightForRowAtIndexPath:` can be expensive, so you only want to do it once. Memoizing the method that computes the height means that the height will only be calculated once, and a cached result will be returned on all subsequent calls.
+
+```
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *text = [[self memoizeAndInvokeSelector:@selector(paragraphsFromString:) withArguments:self.paragraphs, nil] objectAtIndex:(NSUInteger)indexPath.row];
+    return [[self memoizeAndInvokeSelector:@selector(calculateHeightForText:atIndexPath:) withArguments:text, indexPath, nil] floatValue];
+}
+```
+Note in this example we also memoized the calulation of the datasource array for the tableView, just for fun.
 
 Installation
 ===========

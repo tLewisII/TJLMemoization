@@ -21,7 +21,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CELL" textLabel="P69-q4-Aup" detailTextLabel="lml-pX-PAj" style="IBUITableViewCellStyleSubtitle" id="CWE-d6-kAR">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CELL" textLabel="P69-q4-Aup" style="IBUITableViewCellStyleDefault" id="CWE-d6-kAR">
                                         <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CWE-d6-kAR" id="KiT-4R-ayx">
@@ -29,16 +29,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P69-q4-Aup">
-                                                    <rect key="frame" x="15" y="3" width="34" height="22"/>
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lml-pX-PAj">
-                                                    <rect key="frame" x="15" y="25" width="43" height="15"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -56,7 +49,18 @@
                             <constraint firstAttribute="trailing" secondItem="Aft-5j-iuz" secondAttribute="trailing" id="oQv-3s-SMV"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="71M-ui-55A"/>
+                    <navigationItem key="navigationItem" id="71M-ui-55A">
+                        <barButtonItem key="leftBarButtonItem" title="reload normal" id="iDt-ZY-SSS">
+                            <connections>
+                                <action selector="reloadNormal:" destination="vXZ-lx-hvc" id="XMe-Xg-eLG"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="reload w/memozation" id="azq-Xh-reg">
+                            <connections>
+                                <action selector="reloadWithMemoization:" destination="vXZ-lx-hvc" id="TPC-WC-8xq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Aft-5j-iuz" id="ZwS-bC-LVW"/>
                     </connections>
