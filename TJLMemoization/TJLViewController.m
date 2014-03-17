@@ -10,7 +10,7 @@
 static NSString *const cellIdentifier = @"CELL";
 
 #import "TJLViewController.h"
-#import "NSObject+Memoization.h"
+#import "TJLMemoization.h"
 
 @interface TJLViewController () <UITableViewDataSource, UITableViewDelegate>
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
