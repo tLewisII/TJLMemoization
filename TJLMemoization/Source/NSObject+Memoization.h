@@ -24,10 +24,23 @@
 * @param args A variadic argument list that corresponds to the arguments for the given selector.
 * Arguments must be in the correct order that they would be passed to the selector. primitive and struct arguments
 * must be wrapped in NSNumber or NSValue.
-* @return The A TJLMemoizedFunction object the encapsulates the invocation of the given selector
-* and return value of the given selector.
+* @return A TJLMemoizedFunction object the encapsulates the invocation of the given selector.
 */
 - (TJLMemoizedFunction *)memoizeSelector:(SEL)selector withArguments:(id)args, ... NS_REQUIRES_NIL_TERMINATION;
 
+/**
+* Immediately invokes and memoizes the given selector with the given arguments,
+* caching the return value on the first call
+* and returning this cached value on subsequent calls. Useful for when you need to
+* make intensive computations multiple times with the same inputs but don't want
+* to actually do the computation multiple times for performance reasons.
+*
+* @param selector The selector that you want to memoize. Must be declared on the calling object.
+* @param args A variadic argument list that corresponds to the arguments for the given selector.
+* Arguments must be in the correct order that they would be passed to the selector. primitive and struct arguments
+* must be wrapped in NSNumber or NSValue.
+* @return An object that is the return value of the given selector. Non object values will be wrapped in an
+* NSNumber or NSValue object.
+*/
 - (id)memoizeAndInvokeSelector:(SEL)selector withArguments:(id)args, ... NS_REQUIRES_NIL_TERMINATION;
 @end
